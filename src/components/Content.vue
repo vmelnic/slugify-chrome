@@ -52,9 +52,11 @@
         },
         created: function () {
             const that = this;
+            /* eslint-disable */
             chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
                 that.input = tabs[0].title;
             });
+            /* eslint-enable */
         },
         methods: {
             slugify: function () {
