@@ -36,9 +36,9 @@
 </template>
 
 <script>
-    const Slugify = require('slugify');
-    const Copy = require('clipboard-copy');
-    const Noty = require('noty');
+    import Slugify from 'slugify';
+    import Copy from 'clipboard-copy';
+    import Noty from 'noty';
 
     export default {
         name: 'Content',
@@ -52,11 +52,11 @@
         },
         created: function () {
             const that = this;
-            /* eslint-disable */
-            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-                that.input = tabs[0].title;
-            });
-            /* eslint-enable */
+            if (chrome !== 'undefined' && chrome.tabs && chrome.tabs.query) {
+                chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                    that.input = tabs[0].title;
+                });
+            }
         },
         methods: {
             slugify: function () {
